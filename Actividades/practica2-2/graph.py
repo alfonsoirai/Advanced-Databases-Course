@@ -15,7 +15,7 @@ class Node(object):
         node.adjacencyInverse[self.id] = self
         self.connected += 1
     
-    def update_page_rank(self, d = 0.85):
+    def page_rank_value(self, d):
         acumulado = 0
         for node in self.adjacencyInverse.values():
             acumulado += node.page_rank / node.connected
@@ -43,7 +43,7 @@ class Graph (object):
         keys = self.nodes.keys()
         for _ in range(iteraciones):
             for key in keys:
-                self.nodes[key].update_page_rank(d=0.85)
+                self.nodes[key].page_rank_value(d=0.85)
         page_rank_d={}
         for key in keys:
             page_rank_d[self.nodes[key].name] = self.nodes[key].page_rank
